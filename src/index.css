@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --radius: 16px;
+}
+
+.container-responsive {
+  @apply max-w-6xl mx-auto px-4;
+}
+
+/* Reusable button styles */
+.btn {
+  @apply inline-flex items-center justify-center rounded-full px-5 py-3 text-white bg-brand-600 hover:bg-brand-700 shadow;
+}
+
+.rounded-card {
+  border-radius: var(--radius);
+}
+
+html,
+body {
+  font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial;
+}
+
+/* Hero search overlap */
+.hero-search {
+  box-shadow: 0 12px 24px rgba(16, 24, 40, 0.08);
+}
