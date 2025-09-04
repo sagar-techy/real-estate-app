@@ -24,8 +24,8 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-sm border-b">
-      <div className="container-responsive grid grid-cols-3 items-center h-16">
-        {/* left: logo */}
+      <div className="container-responsive grid grid-cols-[auto_1fr_auto] items-center h-16">
+        {/* left: logo + mobile hamburger */}
         <div className="flex items-center gap-3">
           <Link
             to="/"
@@ -47,6 +47,28 @@ export default function Navbar() {
             </svg>
             <span>PropBot</span>
           </Link>
+
+          {/* show hamburger next to logo on small screens */}
+          <button
+            onClick={() => setOpen((v) => !v)}
+            className="md:hidden p-2 rounded-md border"
+            aria-label="Toggle menu"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </button>
         </div>
 
         {/* center: nav links */}
@@ -72,28 +94,7 @@ export default function Navbar() {
         </nav>
 
         {/* right: auth actions */}
-        <div className="flex items-center justify-end gap-3">
-          {/* mobile hamburger */}
-          <button
-            onClick={() => setOpen((v) => !v)}
-            className="md:hidden p-2 rounded-md border"
-            aria-label="Toggle menu"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          </button>
+        <div className="flex items-center justify-end gap-3 justify-self-end relative z-10">
           {user ? (
             <>
               <span className="text-sm text-gray-600 hidden md:block">
@@ -101,7 +102,7 @@ export default function Navbar() {
               </span>
               <button
                 onClick={onLogout}
-                className="px-4 py-2 bg-brand-700 text-white rounded-full hover:bg-brand-600 shadow"
+                className="inline-flex px-4 py-2 bg-brand-700 text-white rounded-full hover:bg-brand-600 shadow whitespace-nowrap"
               >
                 Logout
               </button>
@@ -110,7 +111,7 @@ export default function Navbar() {
             <>
               <Link
                 to="/login"
-                className="px-4 py-2 bg-brand-700 text-white rounded-full hover:bg-brand-600 shadow"
+                className="inline-flex px-4 py-2 bg-brand-700 text-white rounded-full hover:bg-brand-600 shadow whitespace-nowrap"
               >
                 Login / Register
               </Link>

@@ -10,7 +10,7 @@ export default function Hero() {
   return (
     <section className="relative">
       <div className="container mx-auto px-4 py-12">
-        <div className="relative bg-white rounded-2xl shadow-lg overflow-hidden">
+  <div className="relative bg-white rounded-2xl shadow-lg overflow-visible">
           <img
             src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600&auto=format&fit=crop"
             alt="hero"
@@ -33,15 +33,15 @@ export default function Hero() {
               </div>
 
               <div className="mt-8 relative">
-                <div className="absolute -top-12 left-4 md:left-6 w-full">
-                  <div className="bg-white rounded-full hero-search px-4 py-4 flex items-center gap-4">
+                <div className="static md:absolute md:-top-12 md:left-4 md:right-4 flex flex-col md:flex-row items-center md:items-center gap-3">
+                  <div className="bg-white rounded-full hero-search px-4 py-3 flex items-center gap-4">
                     <input
                       placeholder="Search Location..."
-                      className="flex-1 rounded-full px-4 py-3 border-none outline-none"
+                      className="flex-1 rounded-full px-6 py-3 border-none outline-none"
                     />
                     <select
                       defaultValue={isBuy ? "For Buying" : "For Rent"}
-                      className="rounded-full border px-4 py-2 text-sm"
+                      className="rounded-full border px-4 py-2 text-sm min-w-[120px] appearance-none"
                     >
                       <option>For Rent</option>
                       <option>For Buying</option>
