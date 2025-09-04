@@ -1,6 +1,6 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import React from "react";
+import React, { useState } from "react";
 
 export default function Navbar() {
   const { user, logout } = useAuth();
@@ -17,6 +17,10 @@ export default function Navbar() {
         ? "text-brand-700 font-semibold"
         : "text-gray-700 hover:text-brand-700"
     }`;
+
+  const [open, setOpen] = useState(false);
+
+  const closeMenu = () => setOpen(false);
 
   return (
     <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-sm border-b">
@@ -46,7 +50,7 @@ export default function Navbar() {
         </div>
 
         {/* center: nav links */}
-        <nav className="flex items-center justify-center gap-6">
+        <nav className="hidden md:flex items-center justify-center gap-6">
           <NavLink to="/" className={linkCls}>
             Home
           </NavLink>
@@ -69,6 +73,27 @@ export default function Navbar() {
 
         {/* right: auth actions */}
         <div className="flex items-center justify-end gap-3">
+          {/* mobile hamburger */}
+          <button
+            onClick={() => setOpen((v) => !v)}
+            className="md:hidden p-2 rounded-md border"
+            aria-label="Toggle menu"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </button>
           {user ? (
             <>
               <span className="text-sm text-gray-600 hidden md:block">
@@ -91,6 +116,90 @@ export default function Navbar() {
               </Link>
             </>
           )}
+        </div>
+
+        {/* mobile menu overlay */}
+        <div
+          className={`md:hidden absolute left-0 right-0 top-full bg-white shadow-lg transition ${
+            open ? "block" : "hidden"
+          }`}
+        >
+          <div className="container-responsive py-4">
+            <nav className="flex flex-col gap-2">
+              <Link
+                to="/"
+                onClick={closeMenu}
+                className="px-3 py-2 text-sm text-gray-700"
+              >
+                Home
+              </Link>
+              <Link
+                to="/?type=buy"
+                onClick={closeMenu}
+                className="px-3 py-2 text-sm text-gray-700"
+              >
+                Buy
+              </Link>
+              <Link
+                to="/listings?type=rent"
+                onClick={closeMenu}
+                className="px-3 py-2 text-sm text-gray-700"
+              >
+                Rent
+              </Link>
+              <Link
+                to="/listings?type=sell"
+                onClick={closeMenu}
+                className="px-3 py-2 text-sm text-gray-700"
+              >
+                Sell
+              </Link>
+              <Link
+                to="/about"
+                onClick={closeMenu}
+                className="px-3 py-2 text-sm text-gray-700"
+              >
+                About Us
+              </Link>
+              <a
+                href="#newsletter"
+                onClick={(e) => {
+                  closeMenu();
+                  setTimeout(
+                    () =>
+                      document
+                        .getElementById("newsletter")
+                        ?.scrollIntoView({ behavior: "smooth" }),
+                    100
+                  );
+                }}
+                className="px-3 py-2 text-sm text-gray-700"
+              >
+                Contact Us
+              </a>
+            </nav>
+            <div className="mt-4">
+              {user ? (
+                <button
+                  onClick={() => {
+                    onLogout();
+                    closeMenu();
+                  }}
+                  className="w-full px-4 py-2 bg-brand-700 text-white rounded-full"
+                >
+                  Logout
+                </button>
+              ) : (
+                <Link
+                  to="/login"
+                  onClick={closeMenu}
+                  className="w-full inline-block text-center px-4 py-2 bg-brand-700 text-white rounded-full"
+                >
+                  Login / Register
+                </Link>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </header>

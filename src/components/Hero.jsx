@@ -19,12 +19,16 @@ export default function Hero() {
 
           <div className="absolute inset-0 flex items-start justify-center mt-12 md:mt-20 pointer-events-none">
             <div className="w-full max-w-5xl px-6 pointer-events-auto">
-                <div className="text-center text-white">
+              <div className="text-center text-white">
                 <h1 className="text-4xl md:text-5xl font-extrabold drop-shadow-lg">
-                  {isBuy ? "Featured Properties For Sale" : "Find Your Dream Home in One Click!"}
+                  {isBuy
+                    ? "Featured Properties For Sale"
+                    : "Find Your Dream Home in One Click!"}
                 </h1>
                 <p className="mt-3 text-white/90">
-                  {isBuy ? "Discover, Buy, or Rent Verified Properties with Ease." : "Discover, Buy, or Rent Verified Properties with Ease."}
+                  {isBuy
+                    ? "Discover, Buy, or Rent Verified Properties with Ease."
+                    : "Discover, Buy, or Rent Verified Properties with Ease."}
                 </p>
               </div>
 
@@ -35,7 +39,10 @@ export default function Hero() {
                       placeholder="Search Location..."
                       className="flex-1 rounded-full px-4 py-3 border-none outline-none"
                     />
-                    <select defaultValue={isBuy ? "For Buying" : "For Rent"} className="rounded-full border px-4 py-2 text-sm">
+                    <select
+                      defaultValue={isBuy ? "For Buying" : "For Rent"}
+                      className="rounded-full border px-4 py-2 text-sm"
+                    >
                       <option>For Rent</option>
                       <option>For Buying</option>
                       <option>For Sale</option>
